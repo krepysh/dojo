@@ -48,7 +48,9 @@ def compile_result(number):
     for score in scores:
         summary_fizbuz += score
 
-    result = 'Fizz' * summary_fizbuz.fizz + 'Buzz' * summary_fizbuz.buzz or str(number)
+    default = str(number)
+    result = 'Fizz' * summary_fizbuz.fizz + 'Buzz' * summary_fizbuz.buzz
+    result = result or default  # use number themselves if no rule for given number
 
     return result
 
