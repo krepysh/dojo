@@ -29,5 +29,5 @@ def test_compile_result():
     assert compile_result(9) == 'Fizz'
     assert compile_result(3) == 'FizzFizz'
     assert compile_result(32) == 'Fizz'
-    assert compile_result(52) == 'FizzBuzz'
+    assert compile_result(52) == 'Buzz'
     assert compile_result(35) == 'FizzBuzzBuzz'
