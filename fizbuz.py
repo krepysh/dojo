@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Callable
 
 
 def generate_fizbuz_answers(answers_count: int) -> list[str]:
@@ -31,7 +32,7 @@ def get_fizbuz(number: int) -> FizzBuzzResult:
     return result
 
 
-def get_extended_fizbuz(number) -> FizzBuzzResult:
+def get_extended_fizbuz(number: int) -> FizzBuzzResult:
     result = FizzBuzzResult()
     if '3' in str(number):
         result.fizz += 1
@@ -41,9 +42,11 @@ def get_extended_fizbuz(number) -> FizzBuzzResult:
 
 
 def compile_result(number):
-    fizbuz = get_fizbuz(number)
-    extended_fizbuz = get_extended_fizbuz(number)
-    summary_fizbuz = fizbuz + extended_fizbuz
+    scoring_function: list[Callable[[int], FizzBuzzResult]] = [get_fizbuz, get_extended_fizbuz]
+    scores = list(map(lambda x: x(number), scoring_function))
+    summary_fizbuz = FizzBuzzResult()
+    for score in scores:
+        summary_fizbuz += score
 
     result = 'Fizz' * summary_fizbuz.fizz + 'Buzz' * summary_fizbuz.buzz or str(number)
 
